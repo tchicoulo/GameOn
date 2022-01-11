@@ -14,7 +14,6 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -68,75 +67,6 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
-  .topnav a {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .topnav.responsive {
-    position: relative;
-  }
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .topnav a {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-  h1.hero-headline {
-    font-size: 2.5rem;
-  }
-  .hero-content {
-    padding: 6px 5px;
-  }
-  p.hero-text {
-    font-size: 1rem;
-  }
-  .main-navbar {
-    padding-top: 30px;
-  }
-  /* .topnav a {
-    padding: 20px 6px;
-  } */
-  .header-logo img {
-    max-width: 50%;
-  }
-  div.content {
-    max-width: 300px;
-  }
-  .formData label {
-    font-size: 12px;
-  }
-  .formData input {
-    height: 30px;
-  }
-}
-
-@media screen and (max-width: 375px) {
-  h1.hero-headline {
-    font-size: 1.5rem;
-  }
-}
-
 main {
   font-size: 130%;
   font-weight: bolder;
@@ -163,6 +93,10 @@ main {
 
 .modal-btn:hover {
   background: #3876ac;
+}
+
+.close-modal {
+  background-color: blue;
 }
 
 .footer {
@@ -266,12 +200,6 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-/* 
-input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
-} */
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -554,6 +482,72 @@ footer {
   .copyrights {
     margin-top: 50px;
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .topnav a {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .topnav.responsive {
+    position: relative;
+  }
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .topnav a {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+  h1.hero-headline {
+    font-size: 2.5rem;
+  }
+  .hero-content {
+    padding: 6px 5px;
+  }
+  p.hero-text {
+    font-size: 1rem;
+  }
+  .main-navbar {
+    padding-top: 30px;
+  }
+  .header-logo img {
+    max-width: 50%;
+  }
+  div.content {
+    max-width: 300px;
+  }
+  .formData label {
+    font-size: 12px;
+  }
+  .formData input {
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  h1.hero-headline {
+    font-size: 1.5rem;
   }
 }
 
