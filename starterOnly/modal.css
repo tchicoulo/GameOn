@@ -489,7 +489,46 @@ footer {
     text-align: center;
   }
 }
+/* Validation Page */
+.bground-valid {
+  display: none;
+  background-color: rgba(94, 110, 110, 0.733);
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
 
+.valid-content {
+  animation-name: modalValidOpen;
+  animation-duration: var(--modal-duration);
+  animation-fill-mode: forwards;
+  display: flex;
+  flex-direction: column;
+  background: rgb(225, 233, 235);
+  max-width: 600px;
+  width: 60%;
+  height: 20%;
+  border-radius: 5px;
+  margin: 0 auto;
+  text-align: center;
+  justify-content: space-evenly;
+}
+
+.icon-valid {
+  font-size: 30px;
+  color: darkgreen;
+  text-align: center;
+}
+
+.btn-home {
+  margin: 0 auto;
+}
+
+/* Medias Queries */
 @media screen and (max-width: 768px) {
   .topnav a {
     display: none;
@@ -548,6 +587,10 @@ footer {
   .formData input {
     height: 30px;
   }
+  .valid-content:nth-child(1) {
+    font-size: 15px;
+    padding: 0 5px;
+  }
 }
 
 @media screen and (max-width: 375px) {
@@ -563,5 +606,16 @@ footer {
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes modalValidOpen {
+  from {
+    opacity: 0;
+    transform: translateY(150px) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(350px) scale(1);
   }
 }

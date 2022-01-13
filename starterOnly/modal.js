@@ -12,9 +12,9 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const validForm = document.querySelector(".valid-form");
-
 const contentModal = document.querySelector(".bground");
 const closeModal = document.querySelector(".close");
+const modalValidBg = document.querySelector(".bground-valid");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -60,12 +60,6 @@ function submitForm(e) {
   checkName = /[a-zA-Z]{2,}/; // 2 characters or more
   checkQuantity = /[0-9]{1,2}/; // // 1 or 2 character numeric
 
-  console.log("prenom :" + firstName);
-  console.log("nom :" + lastName);
-  console.log("mail :" + email);
-  console.log("anniv :" + birthDate);
-  console.log("qté  :" + quantity);
-
   //Test firstname and lastname with 2 characters
   if (checkName.test(firstName) == false) {
     errorFirstName.style.cssText = `
@@ -75,6 +69,7 @@ function submitForm(e) {
     errorFirstName.textContent =
       "Veuillez ajouter au minimum 2 caractères alphabétiques";
   } else {
+    localStorage.setItem("prenom", firstName);
     errorFirstName.style.display = "block";
     errorFirstName.style.color = "green";
     errorFirstName.textContent = "✔️";
@@ -95,7 +90,7 @@ function submitForm(e) {
     testInputs.push("ok");
   }
 
-  //test email
+  //Test email
   if (email.length === 0) {
     errorMail.style.cssText = `
       display: block;
@@ -109,7 +104,7 @@ function submitForm(e) {
     testInputs.push("ok");
   }
 
-  //test Date if empty or not
+  //Test Date if empty or not
   if (birthDate.length != 10) {
     errorBirthDate.style.cssText = `
       display: block;
@@ -124,7 +119,7 @@ function submitForm(e) {
     testInputs.push("ok");
   }
 
-  //test quantity if empty or not
+  //Test quantity if empty or not
   if (checkQuantity.test(quantity) === false && isNaN(quantity)) {
     errorQuantity.style.cssText = `
       display: block;
@@ -138,8 +133,7 @@ function submitForm(e) {
     testInputs.push("ok");
   }
 
-  //test input radio
-
+  //Test input radio checked
   for (let elem of radios) {
     if (elem.checked) {
       errorRadio.style.display = "block";
@@ -156,7 +150,7 @@ function submitForm(e) {
     }
   }
 
-  // checked accept terms
+  // Test accept terms checked
   if (acceptTerms.checked == false) {
     console.log("Termes non acceptés !");
     errorConditions.style.cssText = `
@@ -172,7 +166,32 @@ function submitForm(e) {
     testInputs.push("ok");
   }
 
-  console.log(testInputs);
+  // if all tests inputs are 'ok'
+  if (testInputs.length == 7) {
+    console.log("tests validés !");
+    launchValid();
+  } else {
+    console.log("error test inputs");
+  }
+}
+
+// Open Content page validation
+function launchValid() {
+  let localStorageName = localStorage.getItem("prenom");
+
+  closeModalForm();
+  modalValidBg.style.display = "block";
+  modalValidBg.innerHTML = `
+        <div class="valid-content">
+          <div class="icon-valid">✅</div>
+          <span>Merci ${localStorageName}</span>
+          <span>Votre inscription à bien été enregistrée</span>
+        </div>`;
+
+  setTimeout(() => {
+    window.location = "./index.html";
+    localStorage.clear();
+  }, 3000);
 }
 
 validForm.addEventListener("submit", submitForm);
