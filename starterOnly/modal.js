@@ -57,8 +57,8 @@ function submitForm(e) {
   let errorConditions = document.querySelector(".error-conditions");
 
   //Regex
-  checkName = /[a-zA-Z]{2,}/; // 2 characters or more
-  checkQuantity = /[0-9]{1,2}/; // // 1 or 2 character numeric
+  checkName = /^[a-zA-Z]{2,}$/; // 2 characters or more
+  checkQuantity = /^[0-9]{1,2}$/; // // 1 or 2 character numeric
 
   //Test firstname and lastname with 2 characters
   if (checkName.test(firstName) == false) {
@@ -70,8 +70,7 @@ function submitForm(e) {
       "Veuillez ajouter au minimum 2 caractères alphabétiques";
   } else {
     localStorage.setItem("prenom", firstName);
-    errorFirstName.style.display = "block";
-    errorFirstName.style.color = "green";
+    errorFirstName.classList.add("test-valid");
     errorFirstName.textContent = "✔️";
     testInputs.push("ok");
   }
@@ -84,8 +83,7 @@ function submitForm(e) {
     errorLastName.textContent =
       "Veuillez ajouter au minimum 2 caractères alphabétiques";
   } else {
-    errorLastName.style.display = "block";
-    errorLastName.style.color = "green";
+    errorLastName.classList.add("test-valid");
     errorLastName.textContent = "✔️";
     testInputs.push("ok");
   }
@@ -98,9 +96,8 @@ function submitForm(e) {
       `;
     errorMail.textContent = "Email non valide";
   } else {
-    errorMail.style.display = "block";
+    errorMail.classList.add("test-valid");
     errorMail.textContent = "✔️";
-    errorMail.style.color = "green";
     testInputs.push("ok");
   }
 
@@ -113,22 +110,20 @@ function submitForm(e) {
     errorBirthDate.textContent =
       "Veuillez ajouter une date de naissance valide";
   } else {
-    errorBirthDate.style.display = "block";
-    errorBirthDate.style.color = "green";
+    errorBirthDate.classList.add("test-valid");
     errorBirthDate.textContent = "✔️";
     testInputs.push("ok");
   }
 
   //Test quantity if empty or not
-  if (checkQuantity.test(quantity) === false && isNaN(quantity)) {
+  if (checkQuantity.test(quantity) == false && isNaN(quantity)) {
     errorQuantity.style.cssText = `
       display: block;
       color: red;
       `;
     errorQuantity.textContent = "Veuillez indiquer un nombre";
   } else {
-    errorQuantity.style.display = "block";
-    errorQuantity.style.color = "green";
+    errorQuantity.classList.add("test-valid");
     errorQuantity.textContent = "✔️";
     testInputs.push("ok");
   }
@@ -136,8 +131,7 @@ function submitForm(e) {
   //Test input radio checked
   for (let elem of radios) {
     if (elem.checked) {
-      errorRadio.style.display = "block";
-      errorRadio.style.color = "green";
+      errorRadio.classList.add("test-valid");
       errorRadio.textContent = "✔️";
       testInputs.push("ok");
       break;
@@ -152,16 +146,13 @@ function submitForm(e) {
 
   // Test accept terms checked
   if (acceptTerms.checked == false) {
-    console.log("Termes non acceptés !");
     errorConditions.style.cssText = `
       display: block;
       color: red;
       `;
     errorConditions.textContent = "Veuillez accepter les conditions";
   } else {
-    console.log("Termes acceptés");
-    errorConditions.style.display = "block";
-    errorConditions.style.color = "green";
+    errorConditions.classList.add("test-valid");
     errorConditions.textContent = "✔️";
     testInputs.push("ok");
   }
