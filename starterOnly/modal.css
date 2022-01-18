@@ -481,6 +481,12 @@ input {
   color: darkgreen;
   text-align: center;
 }
+
+.test-valid {
+  display: block;
+  color: green;
+}
+
 footer {
   padding-left: 2vw;
   padding-right: 2vw;
@@ -525,11 +531,6 @@ footer {
     margin-top: 50px;
     text-align: center;
   }
-}
-
-.test-valid {
-  display: block;
-  color: green;
 }
 
 @media screen and (max-width: 768px) {
