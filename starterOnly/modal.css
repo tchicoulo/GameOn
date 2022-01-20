@@ -487,6 +487,11 @@ input {
   color: green;
 }
 
+.test-invalid {
+  display: block;
+  color: red;
+}
+
 footer {
   padding-left: 2vw;
   padding-right: 2vw;

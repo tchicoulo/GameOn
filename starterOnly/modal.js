@@ -47,113 +47,87 @@ function submitForm(e) {
   let radios = document.querySelectorAll("input[name='location']");
   let acceptTerms = document.getElementById("checkbox1");
 
-  //message error values
-  let errorFirstName = document.querySelector(".error-first");
-  let errorLastName = document.querySelector(".error-last");
-  let errorBirthDate = document.querySelector(".error-birthdate");
-  let errorMail = document.querySelector(".error-mail");
-  let errorQuantity = document.querySelector(".error-quantity");
-  let errorRadio = document.querySelector(".error-radio");
-  let errorConditions = document.querySelector(".error-conditions");
-
   //Regex
   checkName = /^[a-zA-Z]{2,}$/; // 2 characters or more
   checkQuantity = /^[0-9]{1,2}$/; // // 1 or 2 character numeric
 
+  //Function Display error
+  function errorDisplay(tag, message, valid) {
+    const container = document.querySelector(".error-" + tag);
+
+    if (!valid) {
+      container.classList.add("test-invalid");
+      container.textContent = message;
+    } else {
+      container.classList.add("test-valid");
+      container.textContent = message;
+    }
+  }
+
   //Test firstname and lastname with 2 characters
   if (checkName.test(firstName) == false) {
-    errorFirstName.style.cssText = `
-      display: block;
-      color: red;
-      `;
-    errorFirstName.textContent =
-      "Veuillez ajouter au minimum 2 caractères alphabétiques";
+    errorDisplay(
+      "first",
+      "Veuillez ajouter au minimum 2 caractères alphabétiques"
+    );
   } else {
+    errorDisplay("first", "✔️", true);
     localStorage.setItem("prenom", firstName);
-    errorFirstName.classList.add("test-valid");
-    errorFirstName.textContent = "✔️";
     testInputs.push("ok");
   }
 
   if (checkName.test(lastName) == false) {
-    errorLastName.style.cssText = `
-      display: block;
-      color: red;
-      `;
-    errorLastName.textContent =
-      "Veuillez ajouter au minimum 2 caractères alphabétiques";
+    errorDisplay(
+      "last",
+      "Veuillez ajouter au minimum 2 caractères alphabétiques"
+    );
   } else {
-    errorLastName.classList.add("test-valid");
-    errorLastName.textContent = "✔️";
+    errorDisplay("last", "✔️", true);
     testInputs.push("ok");
   }
 
   //Test email
   if (email.length === 0) {
-    errorMail.style.cssText = `
-      display: block;
-      color: red;
-      `;
-    errorMail.textContent = "Email non valide";
+    errorDisplay("mail", "Veuillez entrer une adresse email");
+  } else if (!email.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
+    errorDisplay("mail", "Veuillez entrer une adresse mail valide");
   } else {
-    errorMail.classList.add("test-valid");
-    errorMail.textContent = "✔️";
+    errorDisplay("mail", "✔️", true);
     testInputs.push("ok");
   }
 
   //Test Date if empty or not
   if (birthDate.length != 10) {
-    errorBirthDate.style.cssText = `
-      display: block;
-      color: red;
-      `;
-    errorBirthDate.textContent =
-      "Veuillez ajouter une date de naissance valide";
+    errorDisplay("birthdate", "Veuillez ajouter une date de naissance valide");
   } else {
-    errorBirthDate.classList.add("test-valid");
-    errorBirthDate.textContent = "✔️";
+    errorDisplay("birthdate", "✔️", true);
     testInputs.push("ok");
   }
 
   //Test quantity if empty or not
-  if (checkQuantity.test(quantity) == false && isNaN(quantity)) {
-    errorQuantity.style.cssText = `
-      display: block;
-      color: red;
-      `;
-    errorQuantity.textContent = "Veuillez indiquer un nombre";
+  if (checkQuantity.test(quantity) == false) {
+    errorDisplay("quantity", "Veuillez indiquer un nombre entre 0 et 99");
   } else {
-    errorQuantity.classList.add("test-valid");
-    errorQuantity.textContent = "✔️";
+    errorDisplay("quantity", "✔️", true);
     testInputs.push("ok");
   }
 
   //Test input radio checked
   for (let elem of radios) {
     if (elem.checked) {
-      errorRadio.classList.add("test-valid");
-      errorRadio.textContent = "✔️";
+      errorDisplay("radio", "✔️", true);
       testInputs.push("ok");
       break;
     } else {
-      errorRadio.style.cssText = `
-      display: block;
-      color: red;
-      `;
-      errorRadio.textContent = "Veuillez sélectionner une option";
+      errorDisplay("radio", "Veuillez sélectionner une option");
     }
   }
 
   // Test accept terms checked
   if (acceptTerms.checked == false) {
-    errorConditions.style.cssText = `
-      display: block;
-      color: red;
-      `;
-    errorConditions.textContent = "Veuillez accepter les conditions";
+    errorDisplay("conditions", "Veuillez accepter les conditions");
   } else {
-    errorConditions.classList.add("test-valid");
-    errorConditions.textContent = "✔️";
+    errorDisplay("conditions", "✔️", true);
     testInputs.push("ok");
   }
 
