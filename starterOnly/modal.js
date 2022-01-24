@@ -50,6 +50,7 @@ function submitForm(e) {
   //Regex
   checkName = /^[a-zA-Z]{2,}$/; // 2 characters or more
   checkQuantity = /^[0-9]{1,2}$/; // // 1 or 2 character numeric
+  checkMail = /^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i; // email checker
 
   //Function Display error
   function errorDisplay(tag, message, valid) {
@@ -65,7 +66,7 @@ function submitForm(e) {
   }
 
   //Test firstname and lastname with 2 characters
-  if (checkName.test(firstName) == false) {
+  if (!checkName.test(firstName)) {
     errorDisplay(
       "first",
       "Veuillez ajouter au minimum 2 caractères alphabétiques"
@@ -76,7 +77,7 @@ function submitForm(e) {
     testInputs.push("ok");
   }
 
-  if (checkName.test(lastName) == false) {
+  if (!checkName.test(lastName)) {
     errorDisplay(
       "last",
       "Veuillez ajouter au minimum 2 caractères alphabétiques"
@@ -89,7 +90,7 @@ function submitForm(e) {
   //Test email
   if (email.length === 0) {
     errorDisplay("mail", "Veuillez entrer une adresse email");
-  } else if (!email.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
+  } else if (!checkMail.test(email)) {
     errorDisplay("mail", "Veuillez entrer une adresse mail valide");
   } else {
     errorDisplay("mail", "✔️", true);
@@ -105,7 +106,7 @@ function submitForm(e) {
   }
 
   //Test quantity if empty or not
-  if (checkQuantity.test(quantity) == false) {
+  if (!checkQuantity.test(quantity)) {
     errorDisplay("quantity", "Veuillez indiquer un nombre entre 0 et 99");
   } else {
     errorDisplay("quantity", "✔️", true);
@@ -124,7 +125,7 @@ function submitForm(e) {
   }
 
   // Test accept terms checked
-  if (acceptTerms.checked == false) {
+  if (!acceptTerms.checked) {
     errorDisplay("conditions", "Veuillez accepter les conditions");
   } else {
     errorDisplay("conditions", "✔️", true);
